@@ -18,7 +18,7 @@ Crude natural gas from two production wells contains heavier hydrocarbons (C2–
  
 | Tool | Purpose |
 |---|---|
-| Aspen HYSYS v12 | Process simulation and column convergence |
+| Aspen HYSYS v11 | Process simulation and column convergence |
 | Peng-Robinson (PR) EOS | Fluid package for vapour-liquid equilibrium |
 | HYSYS Column Specs | Overhead purity and product ratio targeting |
 
