@@ -4,4 +4,4 @@ Simulating the separation of natural gas liquids from crude wellhead gas using a
 
 ## Flowsheet Overview
 
-![NGL Fractionation Train Flowsheet]()
+![NGL Fractionation Train Flowsheet](https://github.com/purity-portfolio/NGL-fractionation-train-simulation/blob/main/NGL%20FRACTIONATION%20TRAIN.png)
