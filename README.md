@@ -137,7 +137,7 @@ A 24-stage distillation column with a total condenser. Feed enters at stage 11. 
  
 ## What I Learnt
  
-**Sequencing matters in multi-column trains.** The order of separation — lightest component first — isn't arbitrary. Removing methane first prevents it from loading up the downstream columns and driving up reboiler duties. Getting the sequencing wrong would have cascading convergence problems across the whole flowsheet.
+**Sequencing matters in multi-column trains.** The order of separation, lightest component first isn't arbitrary. Removing methane first prevents it from loading up the downstream columns and driving up reboiler duties. Getting the sequencing wrong would have cascading convergence problems across the whole flowsheet.
  
 **Product specifications drive backwards into your design.** The requirement for methane overhead mole fraction of 0.96 forced me to revisit my Ovhd Prod Rate specification. I didn't fully appreciate early on how tightly these constraints are coupled changing one spec ripples through everything else.
  
