@@ -139,13 +139,12 @@ A 24-stage distillation column with a total condenser. Feed enters at stage 11. 
  
 **Sequencing matters in multi-column trains.** The order of separation — lightest component first — isn't arbitrary. Removing methane first prevents it from loading up the downstream columns and driving up reboiler duties. Getting the sequencing wrong would have cascading convergence problems across the whole flowsheet.
  
-**Column specs are leverage points, not just targets.** Adjusting the overhead product rate on the Demethanizer to hit C1 purity of 0.96 forced me to think about how that one spec ripples downstream — the composition of the bottoms stream directly sets the difficulty of the De-ethanizer separation. Specs on one column are boundary conditions for the next.
+**Product specifications drive backwards into your design.** The requirement for methane overhead mole fraction of 0.96 forced me to revisit my Ovhd Prod Rate specification. I didn't fully appreciate early on how tightly these constraints are coupled changing one spec ripples through everything else.
  
-**Cryogenic separations demand more than standard column setup.** Setting up the Demethanizer as a reboiled absorber rather than a distillation column was the practical solution to operating at -125°F, where a conventional condenser duty would be enormous. Injecting the external 2×10⁶ BTU/hr at stage 4 instead of using a reflux loop achieves the same separation effect at lower capital cost.
+**Pressure drops are easy to overlook but critical.** The 35 kPa condenser pressure drop in both the De-Ethanizer and De-Propanizer seems minor, but ignoring it throws off your temperature profiles entirely. I learned to always account for pressure drops across every section of a column, not just the overall operating pressure.
  
-**Pressure-enthalpy relationships drive design choices.** The valve between the De-ethanizer bottoms and De-propanizer feed isn't just plumbing — it's a deliberate Joule-Thomson pressure drop that partially flashes the C3+ stream and reduces the reboiler load on Column 3.
+**Simulation and understanding are two different things.** Getting the flowsheet to converge felt like a win, but I realized I couldn't fully explain why certain parameters were set the way they were until I went back to the fundamentals. The simulator gives you answers the engineering understanding has to come from you.
  
-**Convergence is a diagnostic tool.** When columns don't converge, HYSYS is telling you something about the physics — either the specifications are thermodynamically inconsistent, the feed stage is wrong, or the column doesn't have enough stages to achieve the required separation. Learning to read convergence failures as engineering feedback rather than software errors was the most practically useful skill from this project.
 
 
 
