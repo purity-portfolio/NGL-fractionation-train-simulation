@@ -49,6 +49,104 @@ Two wellhead streams are combined as feed to the Demethanizer.
 | Pressure | 330 psia | 332 psia |
 | Flow Rate | 3,575 lbmol/h | 475 lbmol/h |
 
+---
+ 
+## Process Description
+ 
+### Column 1 — Demethanizer (Reboiled Absorber)
+ 
+The two well streams enter a 10-stage reboiled absorber. Well 1 feeds from the top stage; Well 2 from stage 2. An external duty of 2×10⁶ BTU/hr is supplied at stage 4 to improve separation efficiency.
+ 
+| Parameter | Value |
+|---|---|
+| No. of stages | 10 |
+| Top stage pressure | 330 psia |
+| Reboiler pressure | 335 psia |
+| Top stage temperature | -125°F |
+| Reboiler temperature | 80°F |
+| Overhead product rate | 2,950 lbmol/h |
+| **Product purity target** | **C1 mole fraction ≥ 0.96** |
+ 
+**Overhead product:** Pipeline-grade methane  
+**Bottom product:** NGL-rich liquid (C2+), pumped to 2,790 kPa and fed to Column 2
+ 
+---
+ 
+### Column 2 — De-ethanizer (Distillation Column)
+ 
+A 14-stage distillation column with a partial condenser. Feed enters at stage 6. Ethane exits as the overhead vapour product; the C3+ bottom stream is pressure-reduced to 1,690 kPa via a valve and fed to Column 3.
+ 
+| Parameter | Value |
+|---|---|
+| No. of stages | 14 |
+| Feed stage | 6 |
+| Condenser type | Partial |
+| Condenser pressure | 2,725 kPa |
+| Reboiler pressure | 2,792 kPa |
+| Condenser temperature | -4°C |
+| Reboiler temperature | 95°C |
+| Overhead vapour rate | 320 kgmol/h |
+| Reflux ratio | 2.5 (molar) |
+| **Product purity target** | **C2/C3 ratio in bottoms ≤ 0.01** |
+ 
+**Overhead products:** Ethane vapour + ethane liquid  
+**Bottom product:** C3+ stream, throttled to 1,690 kPa
+ 
+---
+ 
+### Column 3 — De-propanizer (Distillation Column)
+ 
+A 24-stage distillation column with a total condenser. Feed enters at stage 11. Propane is recovered overhead as a liquid product; heavier hydrocarbons (C4+) exit at the bottom.
+ 
+| Parameter | Value |
+|---|---|
+| No. of stages | 24 |
+| Feed stage | 11 |
+| Condenser type | Total |
+| Condenser pressure | 1,585 kPa |
+| Reboiler pressure | 1,655 kPa |
+| Condenser temperature | 38°C |
+| Reboiler temperature | 120°C |
+| Distillate rate | 110 kgmol/h |
+| Reflux ratio | 1.0 (molar) |
+| **Product purity target** | **i-C4 + n-C4 overhead mol fraction ≤ 0.15; C3 bottoms mol fraction ≤ 0.02** |
+ 
+**Overhead product:** Propane liquid (LPG-grade)  
+**Bottom product:** Heavier hydrocarbons (C4+, NGL condensate)
+ 
+---
+ 
+## Product Summary
+ 
+| Stream | Product | Key Specification Met |
+|---|---|---|
+| Demethanizer overhead | Methane (pipeline gas) | C1 mol fraction = 0.96 |
+| De-ethanizer overhead | Ethane (vapour + liquid) | C2/C3 bottoms ratio = 0.01 |
+| De-propanizer overhead | Propane liquid (LPG) | i-C4 + n-C4 ≤ 0.15 mol fraction |
+| De-propanizer bottoms | Heavier hydrocarbons (C4+) | C3 mol fraction ≤ 0.02 |
+ 
+---
+ 
+## Key Engineering Decisions
+ 
+- **Reboiled absorber for Column 1** — chosen over a standard distillation column because the Demethanizer operates at cryogenic conditions (-125°F top stage) where a conventional condenser is impractical. The external duty injection at stage 4 compensates for the absence of a condenser and improves methane recovery.
+- **Peng-Robinson EOS** — selected as the fluid package because it accurately models vapour-liquid equilibria for light hydrocarbon systems at the high-pressure, low-temperature conditions across all three columns.
+- **Pressure staging across the train** — each column operates at progressively lower pressure (330 psia → ~400 psia → ~2,790 kPa → ~1,690 kPa), with deliberate pressure reduction via pump and valve between columns to maintain thermodynamic driving force for separation.
+- **Partial condenser on De-ethanizer** — allows simultaneous recovery of ethane as both vapour and liquid products, providing flexibility for downstream use.
+---
+ 
+## What I Learnt
+ 
+**Sequencing matters in multi-column trains.** The order of separation — lightest component first — isn't arbitrary. Removing methane first prevents it from loading up the downstream columns and driving up reboiler duties. Getting the sequencing wrong would have cascading convergence problems across the whole flowsheet.
+ 
+**Column specs are leverage points, not just targets.** Adjusting the overhead product rate on the Demethanizer to hit C1 purity of 0.96 forced me to think about how that one spec ripples downstream — the composition of the bottoms stream directly sets the difficulty of the De-ethanizer separation. Specs on one column are boundary conditions for the next.
+ 
+**Cryogenic separations demand more than standard column setup.** Setting up the Demethanizer as a reboiled absorber rather than a distillation column was the practical solution to operating at -125°F, where a conventional condenser duty would be enormous. Injecting the external 2×10⁶ BTU/hr at stage 4 instead of using a reflux loop achieves the same separation effect at lower capital cost.
+ 
+**Pressure-enthalpy relationships drive design choices.** The valve between the De-ethanizer bottoms and De-propanizer feed isn't just plumbing — it's a deliberate Joule-Thomson pressure drop that partially flashes the C3+ stream and reduces the reboiler load on Column 3.
+ 
+**Convergence is a diagnostic tool.** When columns don't converge, HYSYS is telling you something about the physics — either the specifications are thermodynamically inconsistent, the feed stage is wrong, or the column doesn't have enough stages to achieve the required separation. Learning to read convergence failures as engineering feedback rather than software errors was the most practically useful skill from this project.
+
 
 
 
