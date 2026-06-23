@@ -4,3 +4,4 @@ Simulating the separation of natural gas liquids from crude wellhead gas using a
 
 ## Flowsheet Overview
 
+![NGL Fractionation Train Flowsheet]()
