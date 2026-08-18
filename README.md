@@ -127,25 +127,3 @@ A 24-stage distillation column with a total condenser. Feed enters at stage 11. 
  
 ---
  
-## Key Engineering Decisions
- 
-- **Reboiled absorber for Column 1** — chosen over a standard distillation column because the Demethanizer operates at cryogenic conditions (-125°F top stage) where a conventional condenser is impractical. The external duty injection at stage 4 compensates for the absence of a condenser and improves methane recovery.
-- **Peng-Robinson EOS** — selected as the fluid package because it accurately models vapour-liquid equilibria for light hydrocarbon systems at the high-pressure, low-temperature conditions across all three columns.
-- **Pressure staging across the train** — each column operates at progressively lower pressure (330 psia → ~400 psia → ~2,790 kPa → ~1,690 kPa), with deliberate pressure reduction via pump and valve between columns to maintain thermodynamic driving force for separation.
-- **Partial condenser on De-ethanizer** — allows simultaneous recovery of ethane as both vapour and liquid products, providing flexibility for downstream use.
----
- 
-## What I Learnt
- 
-**Sequencing matters in multi-column trains.** The order of separation, lightest component first isn't arbitrary. Removing methane first prevents it from loading up the downstream columns and driving up reboiler duties. Getting the sequencing wrong would have cascading convergence problems across the whole flowsheet.
- 
-**Product specifications drive backwards into your design.** The requirement for methane overhead mole fraction of 0.96 forced me to revisit my Ovhd Prod Rate specification. I didn't fully appreciate early on how tightly these constraints are coupled changing one spec ripples through everything else.
- 
-**Pressure drops are easy to overlook but critical.** The 35 kPa condenser pressure drop in both the De-Ethanizer and De-Propanizer seems minor, but ignoring it throws off your temperature profiles entirely. I learned to always account for pressure drops across every section of a column, not just the overall operating pressure.
- 
-**Simulation and understanding are two different things.** Getting the flowsheet to converge felt like a win, but I realized I couldn't fully explain why certain parameters were set the way they were until I went back to the fundamentals. The simulator gives you answers the engineering understanding has to come from you.
- 
-
-
-
-
